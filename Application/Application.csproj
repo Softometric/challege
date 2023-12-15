@@ -62,4 +62,8 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\CustomerManagement\EventHandlers\" />
+  </ItemGroup>
+
 </Project>

@@ -29,5 +29,19 @@ namespace Presentation.Controllers
             var result = await Mediator.Send(new GetProductsQuery{});
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
         }
+
+        [HttpDelete]
+        [Route("delete-product/{productId}")]
+        [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteProduct([FromRoute] string productId)
+        {
+            var command = new DeleteProductCommand
+            {
+                ProductId = productId
+            };
+            var result = await Mediator.Send(command);
+            return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
+        }
     }
 }

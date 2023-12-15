@@ -12,6 +12,11 @@ namespace Application.Common.Interfaces.Repository
     public interface IUnitOfWork : IDisposable
     {
         IProductRepository ProductStore { get; }
+
+        IInventoryRepository InventoryStore { get; }
+
+        ICustomerRepository CustomerStore { get; }
+
         Task Commit();
     }
 }

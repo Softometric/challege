@@ -38,6 +38,7 @@ namespace Infrastructure.DependencyManager
             services.AddSingleton<BaseClientHelper>();
             services.AddTransient<IUnitOfWork, UoW>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IInventoryRepository, InventoryRepository>();
             services.AddScoped<AuditableEntitySaveChangesInterceptor>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IDateTime, DateTimeService>();

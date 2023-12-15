@@ -5,15 +5,22 @@ namespace Infrastructure.Persistence.Factories
     public class UoW : IUnitOfWork
     {
         private readonly SalesDbContext _context;
-        public UoW(SalesDbContext context, IProductRepository productStore)
+        public UoW(SalesDbContext context, IProductRepository productStore, IInventoryRepository inventoryStore, 
+                  ICustomerRepository customerStore)
         {
             _context = context;
             ProductStore = productStore;
+            InventoryStore = inventoryStore;
+            CustomerStore = customerStore;
         }
 
         private bool _disposed;
         
         public IProductRepository ProductStore { get; }
+
+        public IInventoryRepository InventoryStore { get; }
+
+        public ICustomerRepository CustomerStore { get; }
 
         public async Task Commit()
         {
