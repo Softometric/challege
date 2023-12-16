@@ -15,7 +15,7 @@ namespace Presentation.Controllers
     public class CustomerController : ApiControllerBase
     {
         [HttpPost]
-        [Route("CreateCustomer")]
+        [Route("Create-Customer")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand command)
@@ -24,8 +24,8 @@ namespace Presentation.Controllers
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
         }
         [HttpGet]
-        [Route("GetCustomers")]
-        [ProducesResponseType(typeof(ResponseModel<CustomerModel>), StatusCodes.Status200OK)]
+        [Route("Get-Customers")]
+        [ProducesResponseType(typeof(ResponseModel<CustomerResponseModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetProducts()
         {
@@ -34,7 +34,7 @@ namespace Presentation.Controllers
         }
 
         [HttpDelete]
-        [Route("delete-customer/{customerId}")]
+        [Route("Delete-Customer/{customerId}")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteProduct([FromRoute] string customerId)

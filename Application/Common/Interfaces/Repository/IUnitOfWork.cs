@@ -17,6 +17,8 @@ namespace Application.Common.Interfaces.Repository
 
         ICustomerRepository CustomerStore { get; }
 
+        ISalesOrderRepository SalesOrderStore { get; }
+
         Task Commit();
     }
 }

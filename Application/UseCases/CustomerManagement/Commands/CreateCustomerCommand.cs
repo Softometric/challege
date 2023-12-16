@@ -35,7 +35,7 @@ namespace Application.UseCases.CustomerManagement.Commands
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.LastName,
+                Email = request.Email,
                 CustomerAddress = new Address(request.StreetNumber, request.StreetName, request.LandMark, request.City),
                 Gender = request.Gender,
                 Created = DateTime.Now,

@@ -24,16 +24,21 @@ namespace Application.UseCases.CustomerManagement.Queries
         {
             if (_uow.CustomerStore.Get() is not { } customers)
             {
-                return ResponseModel<List<CustomerModel>>.Success(data: new List<CustomerModel>(), "Customer list is empty");
+                return ResponseModel<List<CustomerResponseModel>>.Success(data: new List<CustomerResponseModel>(), "Customer list is empty");
             }
 
-            return ResponseModel<List<CustomerModel>>.Success(data: customers.Select(c => new CustomerModel
+            return ResponseModel<List<CustomerResponseModel>>.Success(data: customers.Select(c => new CustomerResponseModel
             {
                 Id = c.Id,
                Email = c.Email,
                FirstName = c.FirstName,
                LastName = c.LastName,
-               PhoneNo = c.PhoneNo
+               PhoneNo = c.PhoneNo,
+               StreetNumber = c.CustomerAddress.Number,
+               StreetName = c.CustomerAddress.StreetName,
+               LandMark = c.CustomerAddress.LandMark,
+               City = c.CustomerAddress.City,
+               Gender = c.Gender.ToString(),
             }).ToList());
         }
     }

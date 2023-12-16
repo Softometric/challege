@@ -11,7 +11,7 @@ namespace Presentation.Controllers
     public class InventoryController : ApiControllerBase
     {
         [HttpPost]
-        [Route("CreateInventory")]
+        [Route("Create-Inventory")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateInventoryCommand command)
@@ -20,7 +20,7 @@ namespace Presentation.Controllers
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
         }
         [HttpGet]
-        [Route("GetInventories")]
+        [Route("Get-Inventories")]
         [ProducesResponseType(typeof(ResponseModel<InventoryModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetProducts()
@@ -30,7 +30,7 @@ namespace Presentation.Controllers
         }
 
         [HttpDelete]
-        [Route("delete-inventory/{inventoryId}")]
+        [Route("Delete-Inventory/{inventoryId}")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteInventory([FromRoute] string inventoryId)

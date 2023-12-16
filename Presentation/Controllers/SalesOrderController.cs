@@ -1,44 +1,45 @@
-﻿using Application.Common.Extensions;
-using Application.Common.Models;
+﻿using Application.Common.Models;
 using Application.Common.Models.ProductDto;
+using Application.Common.Models.SalesOrderDto;
 using Application.UseCases.ProductManagement.Commands;
 using Application.UseCases.ProductManagement.Queries;
-using Microsoft.AspNetCore.Authorization;
+using Application.UseCases.SalesOrderManagement.Commands;
+using Application.UseCases.SalesOrderManagement.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Presentation.Controllers
 {
-    public class ProductController : ApiControllerBase
+    public class SalesOrderController : ApiControllerBase
     {
         [HttpPost]
-        [Route("Create-Product")]
+        [Route("Create-Sales-Order")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateSalesOrderCommand command)
         {
             var result = await Mediator.Send(command);
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
         }
         [HttpGet]
-        [Route("Get-Products")]
-        [ProducesResponseType(typeof(ResponseModel<ProductModel>), StatusCodes.Status200OK)]
+        [Route("Get-Sales-Orders")]
+        [ProducesResponseType(typeof(ResponseModel<SalesOrderResponseModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetProducts()
         {
-            var result = await Mediator.Send(new GetProductsQuery{});
+            var result = await Mediator.Send(new GetSalesOrdersQuery{});
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
         }
 
         [HttpDelete]
-        [Route("Delete-Product/{productId}")]
+        [Route("Delete-Sales-Order/{orderId}")]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseModel), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteProduct([FromRoute] string productId)
+        public async Task<IActionResult> DeleteProduct([FromRoute] string orderId)
         {
-            var command = new DeleteProductCommand
+            var command = new DeleteSalesOrderCommand
             {
-                ProductId = productId
+                OrderId = orderId
             };
             var result = await Mediator.Send(command);
             return result.IsSuccessful ? Ok(result) : (IActionResult)BadRequest(result);
